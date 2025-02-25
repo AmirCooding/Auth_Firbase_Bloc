@@ -17,9 +17,10 @@ A Flutter project implementing **Clean Architecture**, **GetIt** for dependency 
 ```
 lib/
 │── core/                # Core utilities, constants, and helpers
-│── data/                # Data layer (Repositories, Data sources, Models)
-│── domain/              # Business logic (Entities, UseCases, Repositories Interfaces)
-│── presentation/        # UI Layer (Screens, Widgets, State Management)
+│── auth_feature/        # Authentication feature module
+│   │── data/            # Data layer (Repositories, Data sources, Models)
+│   │── domain/          # Business logic (Entities, UseCases, Repositories Interfaces)
+│   │── presentation/    # UI Layer (Screens, Widgets, State Management)
 │── main.dart            # Entry point
 ```
 
