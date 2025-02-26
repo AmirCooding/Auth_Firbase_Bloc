@@ -1,10 +1,17 @@
 import 'package:auth/auth_feauter/data/model/auth_model.dart';
 import 'package:auth/auth_feauter/data/remote/firbase_sarvice/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'firebase_auth_test.mocks.dart';
 
+@GenerateMocks([
+  FirebaseAuth,
+  User,
+  UserCredential,
+])
 void main() {
   late MyFirebaseAuth authRepo;
   late MockFirebaseAuth mockFirebaseAuth;
@@ -12,7 +19,7 @@ void main() {
   late MockUserCredential mockUserCredential;
 
   setUp(() {
-    //  Step 5: Create instances of the mocks
+    //   Create instances of the mocks
     mockFirebaseAuth = MockFirebaseAuth();
     mockUser = MockUser();
     mockUserCredential = MockUserCredential();
