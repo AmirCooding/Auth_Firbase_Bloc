@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "995516789253",
+    "project_id": "flutte-auth-d249d",
+    "storage_bucket": "flutte-auth-d249d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995516789253:android:203df10f26f77fc607626c",
+        "android_client_info": {
+          "package_name": "com.example.auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCniiPNgy5vE6JJzDi3KVwoRmd_KJIAkDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
