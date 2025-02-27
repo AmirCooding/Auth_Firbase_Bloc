@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable {
-  UserEntity(
+  const UserEntity(
       {required this.email,
       required this.name,
       required this.lastName,

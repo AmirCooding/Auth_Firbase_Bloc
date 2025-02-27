@@ -1,5 +1,6 @@
 import 'package:auth/auth_feauter/data/model/auth_model.dart';
-import 'package:auth/auth_feauter/data/remote/firbase_sarvice/firebase_auth.dart';
+import 'package:auth/auth_feauter/data/remote/firbase_sarvice/firebase_auth_service.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -13,7 +14,7 @@ import 'firebase_auth_test.mocks.dart';
   UserCredential,
 ])
 void main() {
-  late MyFirebaseAuth authRepo;
+  late FirebaseAuthService authRepo;
   late MockFirebaseAuth mockFirebaseAuth;
   late MockUser mockUser;
   late MockUserCredential mockUserCredential;
@@ -25,7 +26,7 @@ void main() {
     mockUserCredential = MockUserCredential();
 
     //  Inject mock FirebaseAuth into the auth repository
-    authRepo = MyFirebaseAuth(mockFirebaseAuth);
+    authRepo = FirebaseAuthService(mockFirebaseAuth);
   });
 
   group('Firebase Authentication Tests', () {
@@ -46,7 +47,7 @@ void main() {
 
       //  Call signUp method
       final result = await authRepo
-          .signUp(AuthModel(id: '', email: testEmail, password: testPassword));
+          .signUp(AuthModel(email: testEmail, password: testPassword));
 
       //  Validate results
       expect(result, isNotNull);
@@ -67,7 +68,7 @@ void main() {
 
       //  Call signIn method
       final result = await authRepo
-          .signIn(AuthModel(id: '', email: testEmail, password: testPassword));
+          .signIn(AuthModel(email: testEmail, password: testPassword));
 
       //  Validate results
       expect(result, isNotNull);

@@ -3,9 +3,20 @@ import 'dart:developer';
 import 'package:auth/auth_feauter/data/model/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class MyFirebaseAuth {
+class FirebaseAuthService {
   final FirebaseAuth _auth;
-  MyFirebaseAuth(this._auth);
+  FirebaseAuthService(this._auth);
+
+// check if email is already registered
+  Future<bool> isEmailAlreadyRegistered(String email) async {
+    try {
+      final User? user = _auth.currentUser;
+      return true;
+    } catch (e) {
+      log("Error checking email existence: $e");
+      return false;
+    }
+  }
 
   Future<AuthModel?> signIn(AuthModel auth) async {
     try {
@@ -17,7 +28,6 @@ class MyFirebaseAuth {
       final User? user = userCredential.user;
       if (user != null) {
         return AuthModel(
-          id: user.uid,
           email: user.email!,
           password: auth.password,
         );
@@ -39,13 +49,12 @@ class MyFirebaseAuth {
       final User? user = userCredential.user;
       if (user != null) {
         return AuthModel(
-          id: user.uid,
           email: user.email!,
           password: auth.password,
         );
       }
     } on FirebaseAuthException catch (e) {
-      log('🔥 Error by Sign Up: ${e.code}');
+      log(' Error by Sign Up: ${e.code}');
       log(e.message ?? "Unknow Error");
     }
     return null;
