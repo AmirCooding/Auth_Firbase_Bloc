@@ -6,12 +6,22 @@ class AuthUsecase {
 
   AuthUsecase(this._authRepository);
 
-  Future<void> signUpWithEmailAndPassword(AuthEnity auth) {
+  Future<void> signUpWithEmailAndPassword(AuthEnity auth) async {
+    if (await _authRepository.isEmailRegistered(auth.email)) {
+      throw Exception("The email is already registered.");
+    }
     return _authRepository.signUpWithEmailAndPassword(auth);
   }
 
-  Future<bool> isEmailRegistered(String email) {
-    return _authRepository.isEmailRegistered(email);
+  Future<bool> isEmailRegistered(String email) async {
+    if (email.isEmpty) {
+      throw Exception("Email cannot be empty.");
+    }
+    try {
+      return await _authRepository.isEmailRegistered(email);
+    } catch (e) {
+      throw Exception("Error checking email registration: ${e.toString()}");
+    }
   }
 
   // Helper method to validate password strength
