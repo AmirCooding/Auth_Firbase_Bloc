@@ -7,11 +7,11 @@ class FirebaseAuthService {
   final FirebaseAuth _auth;
   FirebaseAuthService(this._auth);
 
-// check if email is already registered
   Future<bool> isEmailAlreadyRegistered(String email) async {
     try {
-      final User? user = _auth.currentUser;
-      return true;
+      final List<String> signInMethods =
+          await _auth.fetchSignInMethodsForEmail(email);
+      return signInMethods.isNotEmpty;
     } catch (e) {
       log("Error checking email existence: $e");
       return false;
