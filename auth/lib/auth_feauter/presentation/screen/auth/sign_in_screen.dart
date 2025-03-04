@@ -2,6 +2,7 @@ import 'package:auth/auth_feauter/domain/entity/auth_enity.dart';
 import 'package:auth/auth_feauter/presentation/screen/auth/bloc/auth_bloc.dart';
 import 'package:auth/core/widget/custom_button.dart';
 import 'package:auth/core/widget/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,6 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
           if (state is AuthFailure) {
             Navigator.pop(context);
+            passwordController.clear();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.red,
@@ -83,27 +85,25 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               const SizedBox(height: 40),
               CustomButton(
-                text: "Sign In",
-                onPressed: () {
-                  if (emailController.text.isEmpty ||
-                      passwordController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.red,
-                        content:
-                            Text("Email oder Passwort darf nicht leer sein"),
-                      ),
-                    );
-                    return;
-                  }
-                  context.read<AuthBloc>().add(SignInWithEmailAndPassword(
-                        AuthEntity(
-                          email: emailController.text,
-                          password: passwordController.text,
+                  text: "Sign In",
+                  onPressed: () {
+                    if (emailController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text("Email or password cannot be empty. "),
                         ),
-                      ));
-                },
-              ),
+                      );
+                      return;
+                    }
+                    context.read<AuthBloc>().add(SignInWithEmailAndPassword(
+                          AuthEntity(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        ));
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

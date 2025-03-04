@@ -34,12 +34,14 @@ class FirebaseAuthService {
           email: user.email!,
           password: auth.password,
         );
+      } else {
+        throw Exception("Benutzer nicht gefunden!");
       }
     } on FirebaseAuthException catch (e) {
       log('Failed with error code: ${e.code}');
       log(e.message!);
+      throw Exception(e.message);
     }
-    return null;
   }
 
   Future<AuthModel?> signUp(AuthModel auth) async {

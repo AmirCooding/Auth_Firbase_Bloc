@@ -46,8 +46,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<SignInWithEmailAndPassword>((event, emit) async {
-      emit(AuthLoading());
       try {
+        emit(AuthLoading());
         await usecase.signInWithEmailAndPassword(event.auth);
         emit(SignInSuccess());
       } catch (e) {
@@ -55,13 +55,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-    on<SignOut>((event, emit) {
+    on<SignOut>((event, emit) async {
       emit(AuthLoading());
-      usecase.signOut().then((value) {
-        emit(AuthLoading());
-      }).catchError((e) {
+      try {
+        await usecase.signOut();
+        emit(SignOutSuccess());
+      } catch (e) {
         emit(AuthFailure(e.toString()));
-      });
+      }
     });
   }
 }

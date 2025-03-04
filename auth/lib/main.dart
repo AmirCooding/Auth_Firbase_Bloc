@@ -2,6 +2,7 @@ import 'package:auth/auth_feauter/presentation/screen/auth/bloc/auth_bloc.dart';
 import 'package:auth/auth_feauter/presentation/screen/auth/sign_in_screen.dart';
 import 'package:auth/auth_feauter/presentation/screen/auth/sign_up_screen.dart';
 import 'package:auth/auth_feauter/presentation/screen/profile/profile_screen.dart';
+import 'package:auth/core/widget/custom_button.dart';
 import 'package:auth/firebase_options.dart';
 import 'package:auth/locator/setup_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,8 +54,45 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
-      body: const Center(child: Text("Welcome to Home Screen")),
-    );
+        body: BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoading) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        if (state is SignOutSuccess) {
+          Navigator.pushReplacementNamed(context, "/signin");
+        }
+        if (state is AuthFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(state.message),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Home"),
+              SizedBox(height: 20),
+              CustomButton(
+                  text: "Sign out",
+                  onPressed: () {
+                    context.read<AuthBloc>().add(SignOut());
+                  })
+            ],
+          ),
+        );
+      },
+    ));
   }
 }
