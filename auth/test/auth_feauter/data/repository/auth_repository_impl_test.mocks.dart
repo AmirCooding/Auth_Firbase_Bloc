@@ -30,7 +30,7 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeFirebaseAuthService_0 extends _i1.SmartFake
     implements _i2.FirebaseAuthService {
   _FakeFirebaseAuthService_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthRepositoryImpl].
@@ -43,15 +43,13 @@ class MockAuthRepositoryImpl extends _i1.Mock
   }
 
   @override
-  _i2.FirebaseAuthService get firebaseAuthService =>
-      (super.noSuchMethod(
-            Invocation.getter(#firebaseAuthService),
-            returnValue: _FakeFirebaseAuthService_0(
-              this,
-              Invocation.getter(#firebaseAuthService),
-            ),
-          )
-          as _i2.FirebaseAuthService);
+  _i2.FirebaseAuthService get firebaseAuthService => (super.noSuchMethod(
+        Invocation.getter(#firebaseAuthService),
+        returnValue: _FakeFirebaseAuthService_0(
+          this,
+          Invocation.getter(#firebaseAuthService),
+        ),
+      ) as _i2.FirebaseAuthService);
 
   @override
   set firebaseAuthService(_i2.FirebaseAuthService? _firebaseAuthService) =>
@@ -61,37 +59,32 @@ class MockAuthRepositoryImpl extends _i1.Mock
       );
 
   @override
-  _i4.Future<bool> isEmailRegistered(String? email) =>
+  _i4.Future<bool> isEmailAlreadyRegistered(String? email) =>
       (super.noSuchMethod(
-            Invocation.method(#isEmailRegistered, [email]),
-            returnValue: _i4.Future<bool>.value(false),
-          )
-          as _i4.Future<bool>);
+        Invocation.method(#isEmailRegistered, [email]),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> signInWithEmailAndPassword(_i5.AuthModel? auth) =>
+  _i4.Future<void> signInWithEmailAndPassword(_i6.AuthEntity? auth) =>
       (super.noSuchMethod(
-            Invocation.method(#signInWithEmailAndPassword, [auth]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
+        Invocation.method(#signInWithEmailAndPassword, [auth]),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> signOut() =>
-      (super.noSuchMethod(
-            Invocation.method(#signOut, []),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
+  _i4.Future<void> signOut() => (super.noSuchMethod(
+        Invocation.method(#signOut, []),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> signUpWithEmailAndPassword(_i6.AuthEnity? auth) =>
+  _i4.Future<void> signUpWithEmailAndPassword(_i6.AuthEntity? auth) =>
       (super.noSuchMethod(
-            Invocation.method(#signUpWithEmailAndPassword, [auth]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
+        Invocation.method(#signUpWithEmailAndPassword, [auth]),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:auth/auth_feauter/data/model/auth_model.dart';
+import 'package:auth/auth_feauter/domain/entity/auth_enity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -11,6 +12,8 @@ class FirebaseAuthService {
     try {
       final List<String> signInMethods =
           await _auth.fetchSignInMethodsForEmail(email);
+      log("message: $signInMethods");
+      log("message: ${signInMethods.length}");
       return signInMethods.isNotEmpty;
     } catch (e) {
       log("Error checking email existence: $e");
@@ -18,7 +21,7 @@ class FirebaseAuthService {
     }
   }
 
-  Future<AuthModel?> signIn(AuthModel auth) async {
+  Future<AuthModel?> signIn(AuthEntity auth) async {
     try {
       final UserCredential userCredential =
           await _auth.signInWithEmailAndPassword(
@@ -36,6 +39,7 @@ class FirebaseAuthService {
       log('Failed with error code: ${e.code}');
       log(e.message!);
     }
+    return null;
   }
 
   Future<AuthModel?> signUp(AuthModel auth) async {

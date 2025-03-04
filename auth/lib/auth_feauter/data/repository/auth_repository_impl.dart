@@ -8,12 +8,12 @@ class AuthRepositoryImpl extends AuthRepository {
   FirebaseAuthService firebaseAuthService;
 
   @override
-  Future<bool> isEmailRegistered(String email) {
+  Future<bool> isEmailAlreadyRegistered(String email) {
     return firebaseAuthService.isEmailAlreadyRegistered(email);
   }
 
   @override
-  Future<void> signInWithEmailAndPassword(AuthModel auth) {
+  Future<void> signInWithEmailAndPassword(AuthEntity auth) {
     return firebaseAuthService.signIn(auth);
   }
 
@@ -23,7 +23,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<void> signUpWithEmailAndPassword(AuthEnity auth) {
+  Future<void> signUpWithEmailAndPassword(AuthEntity auth) {
     final authModel = AuthModel(
       email: auth.email,
       password: auth.password,

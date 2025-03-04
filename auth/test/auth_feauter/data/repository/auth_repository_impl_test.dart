@@ -20,12 +20,12 @@ void main() {
   group('AuthRepositoryImpl & AuthUsecase Tests', () {
     test('should return exception if the email is already registered',
         () async {
-      when(mockAuthRepository.isEmailRegistered(any))
+      when(mockAuthRepository.isEmailAlreadyRegistered(any))
           .thenAnswer((_) async => true);
 
       expect(
         () async => await authUsecase.signUpWithEmailAndPassword(
-          AuthEnity(email: "test@example.com", password: "Test@1234"),
+          AuthEntity(email: "test@example.com", password: "Test@1234"),
         ),
         throwsException,
       );
